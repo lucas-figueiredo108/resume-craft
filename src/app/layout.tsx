@@ -1,24 +1,21 @@
 import type { Metadata } from "next";
-import { Nunito, Nunito_Sans } from "next/font/google";
-import "../styles/globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
 
-import { setDefaultOptions } from "date-fns";
-import { ptBR } from "date-fns/locale";
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
-import { cn } from "@/lib/utils";
-import { ClientProviders } from "@/components/shared/client-providers";
-
-const fontSans = Nunito_Sans({ subsets: ["latin"], variable: "--font-sans" });
-const fontTitle = Nunito({ subsets: ["latin"], variable: "--font-title" });
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: "ResumeCraft",
-  icons: {
-    icon: "/favicon.svg",
-  }
+  title: "Resume Craft",
+  description: "Resume Craft Description",
 };
-
-setDefaultOptions({ locale: ptBR });
 
 export default function RootLayout({
   children,
@@ -28,15 +25,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontTitle.variable,
-          fontSans.variable
-        )}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClientProviders>
-          {children}
-        </ClientProviders>
+        {children}
       </body>
     </html>
   );
